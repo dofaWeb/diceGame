@@ -1,0 +1,82 @@
+body{
+
+}
+
+h1{
+    text-align: center;
+    font-size: 3rem;
+    margin-top: 50px;
+    text-shadow: 1px 1px 2px #000;
+    text-transform: uppercase;
+}
+
+#main{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+#stastitic{
+    text-align: left;
+    display: block;
+}
+
+#button{
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    background-color: aqua;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.buttonDisabled{
+    background-color: "grey";
+    color: "black";
+    cursor: "not-allowed";
+}
+
+#button:hover{
+    background-color: #00bfff;
+}
+
+#diceImg{
+    margin-top: 50px;
+}
+
+.buyArea{
+    display: inline-block;
+}
+
+.buy{
+    margin: 0 20px;
+    width: 300px;
+    background-color: #00bfff;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 1.5rem;
+    border: none;
+    cursor: pointer;
+    margin-top: 50px;
+    border-radius: 5px;
+}
+
+.buy:hover{
+    background-color: aqua;
+}
+
+.description{
+    margin-top: 25px;
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
+#descArea{
+    display: inline-block;
+}
+
+.hovered{
+    font-weight: bold;
+}
