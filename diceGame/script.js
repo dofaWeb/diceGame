@@ -239,4 +239,5 @@ if(stateGame == 1) {
     //update the timer
     setInterval(updateTime, 10);
 }
+
 stopDisplay.style.visibility = "hidden";
