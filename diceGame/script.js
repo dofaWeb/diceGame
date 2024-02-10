@@ -1,5 +1,6 @@
-let displayTime = document.getElementById("displayTime");
+
 let timer = 0;
+let totalTimer = 0;
 let sum = 0;
 let currentSum = 0;
 let numDice = 1;
@@ -11,6 +12,8 @@ let rebirthMultiplier = 1;
 let rebirthPrice = 50000;
 let maxDice = 5;
 
+let displayTime = document.getElementById("displayTime");
+let totalTimerDisplay = document.getElementById("totalTimerDisplay");
 let buyButton = document.getElementsByClassName("buy");
 let description = document.getElementsByClassName("description");
 
@@ -81,6 +84,7 @@ function rollDice() {
 //update the timer
 function updateTime() {
     if(stateGame == 1){
+        totalTimer++;
         timer++;
         if (timer >= timeRoll / 10) {
             rollDice();
@@ -88,6 +92,11 @@ function updateTime() {
         }
         let sec = Math.floor(timer / 100).toString().padStart(2, '0');
         let mnSec = Math.floor((timer % 100)).toString().padStart(2, '0');
+
+        let totalSec = Math.floor(totalTimer / 100).toString().padStart(2, '0');
+        let totalMnSec = Math.floor((totalTimer % 100)).toString().padStart(2, '0');
+        let totalHour = Math.floor(totalTimer / 360000).toString().padStart(2, '0');
+        totalTimerDisplay.textContent = totalHour + ':' + totalSec + ':' + totalMnSec;
         displayTime.textContent = sec + ':' + mnSec;
     }
 }
@@ -240,4 +249,4 @@ if(stateGame == 1) {
     setInterval(updateTime, 10);
 }
 
-resumeGame();
+stopDisplay.style.visibility = "hidden";
