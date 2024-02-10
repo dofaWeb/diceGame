@@ -80,3 +80,52 @@ h1{
 .hovered{
     font-weight: bold;
 }
+
+#pause-btn{
+    float: right;
+    margin-top: -45px;
+    background-color: transparent;
+    padding: 0px;
+    border: none;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+#pause-btn:hover{
+    color: hsla(195, 100%, 50%, 0.6);
+}
+
+#modal-stop{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: hsla(0, 0%, 100%, 0.8);
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    
+}
+
+#modal-stop .container{
+    margin-top: 17%;
+    font-size: 40px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#optionBtns{
+    margin-top: 20px;
+}
+
+#resume-btn, #reset-btn{
+    margin: 10px;
+    width: 150px;
+    font-size: 30px;
+    background-color: #00bfff;
+}
+
+#resume-btn:hover, #reset-btn:hover{
+    background-color: aqua;
+}
