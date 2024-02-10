@@ -7,7 +7,7 @@ let dicePrice = 25;
 let multiPrice = 100;
 let multiplier = 1;
 let timeRollPrice = 50;
-let rebirthMultiplier = 5;
+let rebirthMultiplier = 1;
 let rebirthPrice = 50000;
 let maxDice = 5;
 
@@ -21,11 +21,14 @@ let isTrigger = [false, false, false, false];
 
 let total = 0;
 
+let stateGame = 1; //1 - playing, 0 - pause
+
 const numDiceDisplay = document.getElementById("diceCount");
 const multiplierDisplay = document.getElementById("multiplyCount");
 const totalDisplay = document.getElementById("total");
 const timeRollDisplay = document.getElementById("timeRoll");
 const rebirthDisplay = document.getElementById("rebirth");
+const stopDisplay = document.getElementById("modal-stop");
 
 //roll the dice
 function rollDice() {
@@ -77,18 +80,21 @@ function rollDice() {
 
 //update the timer
 function updateTime() {
-    timer++;
-    if (timer >= timeRoll / 10) {
-        rollDice();
-        timer = 1;
+    if(stateGame == 1){
+        timer++;
+        if (timer >= timeRoll / 10) {
+            rollDice();
+            timer = 1;
+        }
+        let sec = Math.floor(timer / 100).toString().padStart(2, '0');
+        let mnSec = Math.floor((timer % 100)).toString().padStart(2, '0');
+        displayTime.textContent = sec + ':' + mnSec;
     }
-    let sec = Math.floor(timer / 100).toString().padStart(2, '0');
-    let mnSec = Math.floor((timer % 100)).toString().padStart(2, '0');
-    displayTime.textContent = sec + ':' + mnSec;
 }
 
 //update the display
-function update() {
+function updateDisplay() {
+    
     diceResult.textContent = `Money: $${sum} | + $${currentSum}`;
     switch(isTrigger.indexOf(true)) {
         case 0:
@@ -197,5 +203,39 @@ Array.from(buyButton).forEach((button) => {
     });
 });
 
-setInterval(update, 10);
-setInterval(updateTime, 10);
+function pauseGame(){
+    stateGame = 0;
+    stopDisplay.style.visibility = "visible";
+}
+
+function resumeGame(){
+    stopDisplay.style.visibility = "hidden";
+    stateGame = 1;
+}
+
+function resetGame(){
+    stateGame = 1;
+    stopDisplay.style.visibility = "hidden";
+    sum = 0;
+    total = 0;
+    timer = 0;
+    currentSum = 0;
+    numDice = 1;
+    dicePrice = 25;
+    multiPrice = 100;
+    multiplier = 1;
+    timeRollPrice = 50;
+    rebirthMultiplier = 1;
+    rebirthPrice = 50000;
+    maxDice = 5;
+    timeRoll = 5000;
+    update();
+}
+
+if(stateGame == 1) {
+    
+    //update the display
+    setInterval(updateDisplay, 10);
+    //update the timer
+    setInterval(updateTime, 10);
+}
