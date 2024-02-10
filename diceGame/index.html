@@ -8,6 +8,10 @@
 </head>
 <body>
     <div id="main">
+        <div id="option">
+            <button id="pause-btn" onclick="pauseGame()">⏸️</button>
+
+        </div>
         <h1>Dice Game</h1>
         <div id="stastitic">
             <label id="diceCount">Dice: 1</label> <br>
@@ -47,6 +51,15 @@
         </div>
     </div>
 
+    <div id="modal-stop">
+        <div class="container">
+            <label>Game Pause</label> <br>
+            <div id="optionBtns">
+                <button id="resume-btn" onclick = "resumeGame()">Resume</button>
+                <button id="reset-btn" onclick = "resetGame()">Reset</button>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
