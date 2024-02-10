@@ -240,4 +240,4 @@ if(stateGame == 1) {
     setInterval(updateTime, 10);
 }
 
-stopDisplay.style.visibility = "hidden";
+resumeGame();
