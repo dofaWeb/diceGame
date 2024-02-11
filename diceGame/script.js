@@ -1,4 +1,3 @@
-
 let timer = 0;
 let totalTimer = 0;
 let sum = 0;
@@ -11,6 +10,7 @@ let timeRollPrice = 50;
 let rebirthMultiplier = 1;
 let rebirthPrice = 50000;
 let maxDice = 5;
+let startGame = true;
 
 let displayTime = document.getElementById("displayTime");
 let totalTimerDisplay = document.getElementById("totalTimerDisplay");
@@ -33,11 +33,19 @@ const timeRollDisplay = document.getElementById("timeRoll");
 const rebirthDisplay = document.getElementById("rebirth");
 const stopDisplay = document.getElementById("modal-stop");
 
+function intialize() {
+    const diceImg = document.getElementById("diceImg");
+    diceImg.innerHTML = "<img src='img/Dice1.png' alt='Dice 1' width='100'>";
+    diceImg.style.visibility = "hidden";
+    startGame = false;
+}
+
 //roll the dice
 function rollDice() {
-
     const diceResult = document.getElementById("diceResult");
     const diceImg = document.getElementById("diceImg");
+    diceImg.style.visibility = "visible";
+    
     currentSum = 0;
 
     let hasCombo = [0, 0, 0, 0, 0, 0];
@@ -92,11 +100,14 @@ function updateTime() {
         }
         let sec = Math.floor(timer / 100).toString().padStart(2, '0');
         let mnSec = Math.floor((timer % 100)).toString().padStart(2, '0');
-
-        let totalSec = Math.floor(totalTimer / 100).toString().padStart(2, '0');
+        
         let totalMnSec = Math.floor((totalTimer % 100)).toString().padStart(2, '0');
+        let totalSec = Math.floor((totalTimer / 100) % 60).toString().padStart(2, '0');
+        let totalMinute = Math.floor((totalTimer / 6000) % 60).toString().padStart(2, '0');
         let totalHour = Math.floor(totalTimer / 360000).toString().padStart(2, '0');
-        totalTimerDisplay.textContent = totalHour + ':' + totalSec + ':' + totalMnSec;
+        totalTimerDisplay.style.fontFamily = "monospace";
+        displayTime.style.fontFamily = "monospace";
+        totalTimerDisplay.textContent = totalHour + ':' + totalMinute + ':' + totalSec + ':' + totalMnSec;
         displayTime.textContent = sec + ':' + mnSec;
     }
 }
@@ -132,7 +143,22 @@ function updateDisplay() {
     description[2].textContent = `$${timeRollPrice}`;
     description[3].textContent = `$${rebirthPrice}`;
 
-    if(rebirthMultiplier >= 5 && timeRoll <= 500) {
+    if(numDice >= maxDice) {
+        buyButton[0].textContent = "Max Dice";
+        buyButton[0].classList.add("buttonDisabled");
+    }else {
+        buyButton[0].textContent = `Buy +1 Dice`;
+        buyButton[0].classList.remove("buttonDisabled");
+    }
+
+    if(timeRoll <= 500 && rebirthMultiplier <= 5) {
+        buyButton[2].classList.add("buttonDisabled");
+    }else if(timeRoll <= 100 && rebirthMultiplier > 5){
+        buyButton[2].classList.add("buttonDisabled");
+    }else{
+        buyButton[2].classList.remove("buttonDisabled");
+    }
+    if(rebirthMultiplier > 5 && timeRoll <= 500) {
         buyButton[2].textContent = "Time Roll - 0.1s";
     }else {
         buyButton[2].textContent = "Time Roll - 0.5s";
@@ -246,7 +272,9 @@ if(stateGame == 1) {
     //update the display
     setInterval(updateDisplay, 10);
     //update the timer
-    setInterval(updateTime, 10);
+    setInterval(updateTime, 5);
 }
 
 stopDisplay.style.visibility = "hidden";
+if(startGame)
+    intialize();
