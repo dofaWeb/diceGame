@@ -38,9 +38,9 @@ h1{
 }
 
 .buttonDisabled{
-    background-color: "grey";
-    color: "black";
-    cursor: "not-allowed";
+    background-color: gray !important;
+    color: black !important;
+    cursor: not-allowed !important;
 }
 
 #button:hover{
