@@ -238,6 +238,19 @@ Array.from(buyButton).forEach((button) => {
     });
 });
 
+let c = addEventListener("keydown", function (e) {
+    if (e.key === "p") {
+        if(stateGame == 1)
+            pauseGame();
+        else
+            resumeGame();
+    } else if (e.key === "r") {
+        resumeGame();
+    } else if (e.key === "Escape") {
+        resetGame();
+    }
+});
+
 function pauseGame(){
     stateGame = 0;
     stopDisplay.style.visibility = "visible";
